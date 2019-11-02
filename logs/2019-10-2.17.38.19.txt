@@ -1,0 +1,1 @@
+{"memberPerTeam":1,"teamNumber":1,"memberNumber":1,"waves":[{"name":"Edgar","mbti":"INTJ","mbtiNumber":4}],"members":[{"name":"Edgar","mbti":"INTJ","mbtiNumber":4}]}

@@ -1,3 +1,6 @@
+// Import renderer for communication
+const { ipcRenderer } = require('electron');
+
 // Get element function
 const gel = el => document.querySelector(el);
 
@@ -59,7 +62,7 @@ const calculate = (info) => {
 const changeStatus = (status, memberNumber) => {
 	const title = gel('.title');
 	const inputContainer = gel('.input-wrapper');
-	const button = gel('input[type="button"]');
+	const button = gel('.continue');
 	const output = [];
 
 	let subOutput = {};
@@ -114,7 +117,8 @@ const changeStatus = (status, memberNumber) => {
 }
 
 const renderCombinations = (allCombinations) => {
-	gel('.input-container').outerHTML = '';
+	if (gel('.input-container')) gel('.input-container').outerHTML = '';
+	gel('.all-combinations-container').innerHTML = '';
 	allCombinations.forEach((combinations, i) => {
 		gel('.all-combinations-container').innerHTML += `
 			<div class="combination-container" id="${combinations[i].team[0].name.toLowerCase()}"></div>
@@ -164,7 +168,11 @@ gel('.continue').addEventListener('click', (e) => {
 		const output = changeStatus(3);
 		globalOutput.members = output;
 		// Now we have everything we need in globalOutput, let's start processing
-		const combinations = calculate(globalOutput);[]
+		const combinations = calculate(globalOutput);
+		ipcRenderer.on('send-response', (event, arg) => {
+			console.log(arg);
+		})
+		ipcRenderer.send('send-output', JSON.stringify(globalOutput))
 		renderCombinations(combinations);
 	}
 });
@@ -178,4 +186,16 @@ gel('.quick-calc').addEventListener('click', () => {
 		<p>Nota: <span style="color: ${colors[number]}">${number}</span></p>
 		<p style="border-bottom: 2px solid ${colors[number]}" >${texts[number]}</p>
 	`;
+});
+
+gel('#log-file').addEventListener('change', () => {
+	const file = gel('#log-file').files[0];
+
+	const reader = new FileReader();
+
+	reader.readAsText(file, 'UTF-8');
+	reader.onload = (e) => {
+		const combinations = calculate(JSON.parse(e.target.result));
+		renderCombinations(combinations);
+	};
 });

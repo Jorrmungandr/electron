@@ -12,8 +12,8 @@ body, html {
     align-items: center;
     flex-direction: column;
     background-color: white;
-    border: 1px solid black;
-    border-radius: 10px;
+    /* border: 1px solid black;
+    border-radius: 10px; */
     padding: 15px;
 }
 
@@ -33,12 +33,66 @@ body, html {
     margin: 5px 0;
 }
 
-.quick-calc-container button {
+.quick-calc-container .quick-calc {
     margin-top: 20px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     padding: 5px;
+    cursor: pointer;
+}
+
+.load-file-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    background-color: white;
+    /* border: 1px solid black;
+    border-radius: 10px;*/
+    padding: 10px 20px;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.load-file-container input {
+    margin: 15px 0px;
+}
+
+.load-file-container input[type="button"] {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
 }
 
 .input-container {
@@ -75,8 +129,9 @@ body, html {
     margin: 5px 0;
 }
 
-.input-container input[type="button"] {
+.input-container .continue {
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .input-wrapper input:nth-child(2n + 1) {

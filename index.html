@@ -13,10 +13,17 @@
 <body>
     <div class="quick-calc-container">
         <h1>Cálculo rápido</h1>
-        <input type="text" class="text" name="mbti1" id="quick-mbti1" placeholder="mbti-1" required/>
-        <input type="text" class="text" name="mbti2" id="quick-mbti2" placeholder="mbti-2" required/>
-        <button class="quick-calc">Calcular</button>
+        <input type="text" class="text" name="mbti1" id="quick-mbti1" placeholder="mbti-1" required />
+        <input type="text" class="text" name="mbti2" id="quick-mbti2" placeholder="mbti-2" required />
+        <input type="button" class="quick-calc" value="Calcular" />
         <div class="quick-result-container"></div>
+    </div>
+    <div class="load-file-container">
+        <div class="upload-btn-wrapper">
+            <button class="btn">Selecionar arquivo</button>
+            <input type="file" name="log" id="log-file" />
+        </div>
+        <input type="button" value="Carregar arquivo mais recente">
     </div>
     <div class="all-combinations-container"></div>
     <div class="input-container">
@@ -28,9 +35,9 @@
         </div>
         <input type="button" class="continue insert-team-number" value="Inserir Quantidades">
     </div>
-    <script src="combinatorialAlgorithm.js"></script>
-    <script src="longVariables.js"></script>
-    <script src="script.js"></script>
+    <script src="./js/combinatorialAlgorithm.js"></script>
+    <script src="./js/longVariables.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>
