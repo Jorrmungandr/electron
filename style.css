@@ -3,6 +3,44 @@ body, html {
     font-family: 'Roboto', sans-serif;
 }
 
+.quick-calc-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.quick-calc-container h1 {
+    font-size: 1.5rem;
+}
+
+.quick-calc-container input {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.quick-calc-container .text {
+    width: 150px;
+    margin: 5px 0;
+}
+
+.quick-calc-container button {
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
 .input-container {
     position: absolute;
     top: 50%;
@@ -45,11 +83,11 @@ body, html {
     margin-top: 15px;
 }
 
-.combinations-container {
+.all-combinations-container {
     position: absolute;
-    left: 50%;
-    top: 20%;
-    transform: translateX(-50%);
+    left: 30%;
+    top: 10%;
+    display: flex;
 }
 
 .combination-container {
@@ -58,19 +96,24 @@ body, html {
     padding: 10px;
     color: #1f1f1f;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    min-width: 200px;
 }
 
 .combination-container .title-container {
-    width: 106% !important;
+    width: 108% !important;
     padding: 0 5px;
 }
 
 .combination-container .title-container h1 {
     font-size: 1.5rem;
     margin: 15px 5px;
+}
+
+.combination-container .title-container p {
+    margin: 5px;
 }
 
 .combination-container h2 {

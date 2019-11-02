@@ -23,11 +23,11 @@ const getTeamSum = (team) => {
 const calculate = (info) => {
 	// First lets translate the strings to numbers
 	info.members.map((member, i) => {
-		info.members[i].mbtiNumber = mbtiValues.indexOf(member['member-mbti'].toUpperCase());
+		info.members[i].mbtiNumber = mbtiValues.indexOf(member.mbti.toUpperCase());
 	});
 	
 	info.waves.map((wave, i) => {
-		info.waves[i].mbtiNumber = mbtiValues.indexOf(wave['wave-mbti'].toUpperCase());
+		info.waves[i].mbtiNumber = mbtiValues.indexOf(wave.mbti.toUpperCase());
 	});
 
 	let allConceivableCombinations = [];
@@ -45,11 +45,12 @@ const calculate = (info) => {
 				team: completeTeam,
 			}
 		});
-		allConceivableCombinations.push(...waveCombinations);
-	});
 
-	// Sorting the array
-	allConceivableCombinations.sort((a, b) => b.sum - a.sum);
+		waveCombinations.sort((a, b) => b.sum - a.sum);
+
+		// Sorting the array
+		allConceivableCombinations.push(waveCombinations);
+	});
 
 	return allConceivableCombinations;
 }
@@ -112,34 +113,29 @@ const changeStatus = (status, memberNumber) => {
 	return output;
 }
 
-const renderCombinations = (combinations) => {
+const renderCombinations = (allCombinations) => {
 	gel('.input-container').outerHTML = '';
-	const colors = [
-		'#000000',
-		'#B62E16',
-		'#FEF64C',
-		'#9EC75D',
-		'#47A559',
-		'#398d48',
-		'#35B0E9',
-	];
-	combinations.forEach(({ average, team }) => {
-		const color = colors[Math.round(average)];
-		gel('.combinations-container').innerHTML += `
-			<div class="combination-container" style="border: 5px solid ${color}" >
-				<div class="title-container" style="border-bottom: 5px solid ${color}">
-					<h1>${team[0]['wave-name']} (${team[0]['wave-mbti']})</h1>
-					<p>Nota: <span style="color: ${color}" >${average.toFixed(2)}</span></p>
-				</div>	
-				${(team.map((member, i) => {
-					if (i !== 0) {
-						return `<h2>${member['member-name']} (${member['member-mbti']})</h2>`;
-					}
-				})).join(' ')}
-			</div>
+	allCombinations.forEach((combinations, i) => {
+		gel('.all-combinations-container').innerHTML += `
+			<div class="combination-container" id="${combinations[i].team[0].name.toLowerCase()}"></div>
 		`;
+		combinations.forEach(({ average, team }) => {
+			const color = colors[Math.round(average)];
+			gel(`#${team[0].name.toLowerCase()}`).innerHTML += `
+				<div class="combination-container" style="border: 5px solid ${color}" >
+					<div class="title-container" style="border-bottom: 5px solid ${color}">
+						<h1>${team[0].name} (${team[0].mbti})</h1>
+						<p>Nota: <span style="color: ${color}" >${average.toFixed(2)}</span></p>
+					</div>	
+					${(team.map((member, i) => {
+						if (i !== 0) {
+							return `<h2>${member.name} (${member.mbti})</h2>`;
+						}
+					})).join(' ')}
+				</div>
+			`;
+		});
 	});
-	console.log(combinations);
 };
 
 let memberNumber;
@@ -168,7 +164,18 @@ gel('.continue').addEventListener('click', (e) => {
 		const output = changeStatus(3);
 		globalOutput.members = output;
 		// Now we have everything we need in globalOutput, let's start processing
-		const combinations = calculate(globalOutput);
+		const combinations = calculate(globalOutput);[]
 		renderCombinations(combinations);
 	}
+});
+
+gel('.quick-calc').addEventListener('click', () => {
+	const first = mbtiValues.indexOf(gel('#quick-mbti1').value);
+	const second = mbtiValues.indexOf(gel('#quick-mbti2').value);
+	const number = mbtiMatrix[first][second];
+
+	gel('.quick-result-container').innerHTML = `
+		<p>Nota: <span style="color: ${colors[number]}">${number}</span></p>
+		<p style="border-bottom: 2px solid ${colors[number]}" >${texts[number]}</p>
+	`;
 });

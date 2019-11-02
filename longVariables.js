@@ -20,11 +20,11 @@ const steps = [
         title: 'Digite o MBTI das Ondas',
         inputModel: [
             {
-                name: 'wave-name',
+                name: 'name',
                 placeholder: 'Nome',
             },
             {
-                name: 'wave-mbti',
+                name: 'mbti',
                 placeholder: 'MBTI',
             },
         ],
@@ -37,11 +37,11 @@ const steps = [
         title: 'Digite o MBTI dos Membros',
         inputModel: [
             {
-                name: 'member-name',
+                name: 'name',
                 placeholder: 'Nome',
             },
             {
-                name: 'member-mbti',
+                name: 'mbti',
                 placeholder: 'MBTI',
             },
         ],
@@ -50,6 +50,24 @@ const steps = [
             value: 'Inserir MBTI dos Membros',
         },
     },
+];
+
+const colors = [
+    '#000000',
+    '#B62E16',
+    '#FEF64C',
+    '#9EC75D',
+    '#47A559',
+    '#35B0E9',
+];
+
+const texts = [
+    'ERRO',
+    'Melhor não',
+    'Chance pequena',
+    'Talvez',
+    'Uma boa chance',
+    'Ideal!',
 ];
 
 const mbtiValues = [
