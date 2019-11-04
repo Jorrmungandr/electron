@@ -26,11 +26,11 @@ const getTeamSum = (team) => {
 const calculate = (info) => {
 	// First lets translate the strings to numbers
 	info.members.map((member, i) => {
-		info.members[i].mbtiNumber = mbtiValues.indexOf(member.mbti.toUpperCase());
+		info.members[i].mbtiNumber = mbtiValues.indexOf(member.mbti.split('-')[0].toUpperCase());
 	});
 	
 	info.waves.map((wave, i) => {
-		info.waves[i].mbtiNumber = mbtiValues.indexOf(wave.mbti.toUpperCase());
+		info.waves[i].mbtiNumber = mbtiValues.indexOf(wave.mbti.split('-')[0].toUpperCase());
 	});
 
 	let allConceivableCombinations = [];
